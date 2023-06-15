@@ -13,7 +13,7 @@ export default function Login() {
   useEffect(() => {
     dispatch(getUsersForValidationThunk());
   }, []);
-  
+
   return (
     <Box>
       <Header />
@@ -32,7 +32,7 @@ export default function Login() {
             borderRight: "3px solid #bbbbbb",
           }}
         >
-          <LoginForm h1={"Secure Sign In"} h4={"For current customers"}/>
+          <LoginForm h1={"Secure Sign In"} h4={"For current customers"} />
         </Box>
         <Box
           sx={{
@@ -41,7 +41,10 @@ export default function Login() {
             paddingLeft: "37px",
           }}
         >
-          <RegistrationForm h1={"Quick Registration"} h4={"For new customers"} />
+          <RegistrationForm
+            h1={"Quick Registration"}
+            h4={"For new customers"}
+          />
         </Box>
       </Box>
     </Box>

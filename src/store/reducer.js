@@ -4,7 +4,9 @@ import {
   USER_LOGOUT,
   PRODUCTS,
   USER_UPDATED,
-  COUNT_UPDATED
+  COUNT_UPDATED,
+  ORDER_COMPLETED,
+  DELETE_ACCOUNT,
 } from "./actions";
 
 const INITIAL_STATE = {
@@ -36,10 +38,18 @@ export const usersReducer = (state = INITIAL_STATE, { type, payload }) => {
         user: {
           ...state.user,
           shoppingCart: state.user.shoppingCart.map((item) =>
-            item.id === payload.id ? { ...item, count: parseFloat(payload.count) } : item
+            item.id === payload.id
+              ? { ...item, count: parseFloat(payload.count) }
+              : item
           ),
         },
       };
+
+    case ORDER_COMPLETED:
+      return { ...state, user: payload };
+
+    case DELETE_ACCOUNT:
+      return { ...state, user: payload };
 
     default:
       return state;

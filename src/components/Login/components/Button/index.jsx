@@ -38,13 +38,14 @@ const BootstrapButton = styled(Button)({
   },
 });
 
-export default function CustomizedButton({ style, text }) {
+export default function CustomizedButton({ style, text, action }) {
   return (
     <BootstrapButton
       type="submit"
       variant="contained"
       style={style}
       disableRipple
+      onClick={action}
     >
       {text}
     </BootstrapButton>

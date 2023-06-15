@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateStatusWhenLogoutThunk } from "../../store/actions";
 import Header from "../Header";
 import { Box } from "@mui/material";
-import Table from './components/Table'
+import Table from "./components/Table";
 import CompleteOrder from "./components/Complete Order";
 
 export default function ShoppingCart() {
@@ -23,7 +23,7 @@ export default function ShoppingCart() {
   }, [user]);
 
   const logOut = async (user) => {
-    navigate('/')
+    navigate("/");
     await dispatch(updateStatusWhenLogoutThunk(user));
     localStorage.removeItem("user");
     await setUserLogin(false);
@@ -31,20 +31,16 @@ export default function ShoppingCart() {
 
   const styles = {
     cartWrapper: {
-        display: 'flex'
-    }
-  }
+      display: "flex",
+    },
+  };
 
   return (
     <>
-      <Header
-        count={count}
-        action={logOut}
-        isLogin={userLogIn}
-      />
-      <Box sx={styles.cartWrapper} className={'container'}>
-        <Table/>
-        <CompleteOrder cart={user.shoppingCart}/>
+      <Header count={count} action={logOut} isLogin={userLogIn} />
+      <Box sx={styles.cartWrapper} className={"container"}>
+        <Table />
+        <CompleteOrder cart={user.shoppingCart} />
       </Box>
     </>
   );

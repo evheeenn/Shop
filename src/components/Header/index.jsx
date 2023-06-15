@@ -5,14 +5,8 @@ import { Link } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 
-export default function Header({ count, action, isLogin, setUserLogin }) {
+export default function Header({ count, action }) {
   const user = useSelector((state) => state.user);
-
-  // useEffect(() => {
-  //   if (user) {
-  //     setUserLogin(true);
-  //   }
-  // }, [isLogin]);
 
   return (
     <Box

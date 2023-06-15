@@ -5,8 +5,7 @@ import ProductRow from "./components/Info Row/components/Product Row";
 import { useSelector } from "react-redux";
 
 export default function Table() {
-
-  const user  = useSelector((store) => store.user)
+  const user = useSelector((store) => store.user);
 
   const styles = {
     tableWrapper: {
@@ -36,11 +35,12 @@ export default function Table() {
         </Typography>
         <Box sx={styles.table}>
           <HeadlineRow />
-          {user == false ? null : user.shoppingCart.length == 0 ? null :
-          user.shoppingCart.map((el, index) => (
-            <ProductRow data={el} key={index} />
-          ))
-          }
+          {user &&
+            user.orders &&
+            user.orders.length > 0 &&
+            user.orders.map((el, index) => (
+              <ProductRow data={el} key={index} />
+            ))}
         </Box>
       </Box>
     </>

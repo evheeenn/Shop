@@ -1,5 +1,4 @@
 import { Box, Typography } from "@mui/material";
-import Counter from "./components/Counter";
 import { useEffect, useState } from "react";
 import deleteImg from '../../../../../../../../img/images/delete.png'
 import { API } from "../../../../../../../services/api";

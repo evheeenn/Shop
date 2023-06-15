@@ -115,8 +115,9 @@ export const API = {
   },
 
   deleteProduct: async (user, product) => {
-
-    const updatedCart = user.shoppingCart.filter((item) => item.id !== product.id);
+    const updatedCart = user.shoppingCart.filter(
+      (item) => item.id !== product.id
+    );
 
     const response = await fetch(
       `https://6442d57333997d3ef91aa550.mockapi.io/api/mindboard/users/${user.id}`,
@@ -124,14 +125,49 @@ export const API = {
         method: "PUT",
         headers: { "content-type": "application/json; charset=utf-8" },
         body: JSON.stringify({
-          ...user, shoppingCart: updatedCart
+          ...user,
+          shoppingCart: updatedCart,
         }),
       }
     ).then((res) => res.json());
 
-    return response
+    return response;
+  },
 
-    console.log(response)
-  }
+  completeOrder: async (user) => {
+    user.shoppingCart.forEach((el) => {
+      const existingItem = user.orders.find((item) => item.id === el.id);
 
+      if (existingItem) {
+        existingItem.count += el.count;
+      } else {
+        user.orders.push(el);
+      }
+    });
+
+    user.shoppingCart = [];
+    const response = await fetch(
+      "https://6442d57333997d3ef91aa550.mockapi.io/api/mindboard/users/" +
+        user.id,
+      {
+        method: "PUT",
+        headers: { "content-type": "application/json; charset=utf-8" },
+        body: JSON.stringify(user),
+      }
+    );
+
+    const res = response.json();
+
+    return res;
+  },
+
+  deleteAccount: async (user) => {
+    await fetch(
+      "https://6442d57333997d3ef91aa550.mockapi.io/api/mindboard/users/" +
+        user.id,
+      {
+        method: "DELETE",
+      }
+    );
+  },
 };

@@ -5,7 +5,9 @@ export const USER_LOGOUT = "USER_LOGOUT";
 export const USERS_FOR_VALIDATION = "USERS_FOR_VALIDATION";
 export const PRODUCTS = "PRODUCTS";
 export const USER_UPDATED = "USER_UPDATED";
-export const COUNT_UPDATED = "COUNT_UPDATED"
+export const COUNT_UPDATED = "COUNT_UPDATED";
+export const ORDER_COMPLETED = "ORDER_COMPLETED";
+export const DELETE_ACCOUNT = "DELETE_ACCOUNT";
 
 const actionCreator = (type, payload) => {
   if (payload) {
@@ -24,8 +26,11 @@ export const getProductsAction = (products) =>
   actionCreator(PRODUCTS, products);
 export const updateShoppingCartAction = (user) =>
   actionCreator(USER_UPDATED, user);
-export const updateCountAction = (id, count) => 
-  actionCreator(COUNT_UPDATED, {id, count})
+export const updateCountAction = (id, count) =>
+  actionCreator(COUNT_UPDATED, { id, count });
+export const orderCompletedAction = (user) =>
+  actionCreator(ORDER_COMPLETED, user);
+export const deleteAccountAction = () => actionCreator(DELETE_ACCOUNT, false);
 
 export const getUserThunk = (id) => {
   return async (dispatch, getState) => {
@@ -72,6 +77,21 @@ export const updateShoppingCartThunk = (user, product) => {
 
 export const deleteFromShoppingCartThunk = (user, product) => {
   return async (dispatch, getState) => {
-    await API.deleteProduct(user, product).then((res) => dispatch(updateShoppingCartAction(res)));
+    await API.deleteProduct(user, product).then((res) =>
+      dispatch(updateShoppingCartAction(res))
+    );
+  };
+};
+
+export const completeOrderThunk = (user) => {
+  return async (dispatch, getState) => {
+    API.completeOrder(user).then((res) => dispatch(orderCompletedAction(res)));
+  };
+};
+
+export const deleteAccountThunk = (user) => {
+  return async (dispatch, getState) => {
+    await API.deleteAccount(user);
+    dispatch(deleteAccountAction());
   };
 };

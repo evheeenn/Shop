@@ -1,15 +1,15 @@
 import { Box, Typography } from "@mui/material";
-import Counter from "./components/Counter";
-import { useEffect, useState } from "react";
-import deleteImg from '../../../../../../../../img/images/delete.png'
-import { API } from "../../../../../../../services/api";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteFromShoppingCartThunk, updateCountAction } from "../../../../../../../../store/actions";
+import {
+  deleteFromShoppingCartThunk,
+  updateCountAction,
+} from "../../../../../../../../store/actions";
 
 export default function ProductRow({ data }) {
-  const user = useSelector((store) => store.user)
-  const dispatch = useDispatch()
-  const [count, setCount] = useState(data.count)
+  const user = useSelector((store) => store.user);
+  const dispatch = useDispatch();
+  const [count, setCount] = useState(data.count);
 
   const styles = {
     main: {
@@ -63,17 +63,13 @@ export default function ProductRow({ data }) {
   };
 
   const counterChanging = (e) => {
-    setCount(e.target.value)
-    dispatch(updateCountAction(data.id, e.target.value))
-  }
+    setCount(e.target.value);
+    dispatch(updateCountAction(data.id, e.target.value));
+  };
 
   const deleteProductDispatch = (user, product) => {
-    dispatch(deleteFromShoppingCartThunk(user, product))
-  }
-
-  const total = data.sale
-    ? data.count * (data.price - (data.price * data.salePercent) / 100)
-    : data.price * data.count
+    dispatch(deleteFromShoppingCartThunk(user, product));
+  };
 
   return (
     <Box sx={styles.main} className={""}>

@@ -32,9 +32,9 @@ export default function Orders() {
   return (
     <>
       <Header count={count} action={logOut} isLogin={userLogIn} />
-      <Box sx={{display: 'flex'}} className={'container'}>
-        <Table/>
-        <AccountData/>
+      <Box sx={{ display: "flex" }} className={"container"}>
+        <Table />
+        <AccountData />
       </Box>
     </>
   );
