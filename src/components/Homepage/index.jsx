@@ -63,7 +63,16 @@ export default function Homepage() {
           flexDirection: "column",
           justifyContent: "center",
           minHeight: "100vh",
-          marginLeft: "83px",
+          marginLeft: {
+            xs: "83px",
+            sm: "83px",
+            ml: "83px",
+            ld: "3px",
+            xl: "3px",
+          },
+          "@media (min-width: 1180px)": {
+            marginLeft: "3px",
+          },
         }}
       >
         {Object.keys(products).map((category) => (
@@ -88,7 +97,14 @@ export default function Homepage() {
             >
               {category}
             </Typography>
-            <Box sx={{ display: "flex" }}>
+            <Box
+              sx={{
+                display: "flex",
+                "@media (max-width: 500px)": {
+                  flexDirection: "column",
+                },
+              }}
+            >
               {products[category].map((el) => (
                 <Product
                   key={el.id}
